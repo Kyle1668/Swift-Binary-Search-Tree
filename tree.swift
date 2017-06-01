@@ -95,9 +95,6 @@ class BinarySearchTree {
         
     }
     
-    private func remove() {
-        
-    }
     
    
 }
