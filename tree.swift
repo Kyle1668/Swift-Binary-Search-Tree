@@ -29,6 +29,18 @@ class BinarySearchTree {
         return root == nil
     }
     
+    func printTree() {
+        printTree(parentNode: root)
+    }
+    
+    private func printTree(parentNode:Node?) {
+        if parentNode != nil {
+            printTree(parentNode: parentNode?.leftChild)
+            parentNode!.printNode()
+            printTree(parentNode: parentNode?.rightChild)
+        }
+    }
+    
     // Operations
     
     func addNode(inUser:User) {
@@ -49,16 +61,45 @@ class BinarySearchTree {
         }
     }
     
-    func printTree() {
-        if let topNode = root {
-            printTree(leftNode: root!.leftChild, rightNode: root!.rightChild)
+    func search(searchID:Int) -> Node? {
+        return search(searchID:searchID, parentNode:root)
+    }
+    
+    private func search(searchID:Int, parentNode:Node?) -> Node? {
+        if parentNode != nil {
+            if searchID == parentNode!.data.ID {
+                return parentNode
+            }
+            else if searchID < parentNode!.data.ID {
+                return search(searchID: searchID, parentNode: parentNode!.leftChild)
+            }
+            else {
+                return search(searchID: searchID, parentNode: parentNode!.rightChild)
+            }
+        }
+        else {
+            return nil
         }
     }
     
-    private func printTree(leftNode:Node, rightNode:Node) {
+    func deleteElement(searchID:Int) {
+        if root != nil {
+            deleteElement(searchID: searchID, parentNode: &root)
+        }
+    }
+    
+    private func deleteElement(searchID:Int, parentNode:inout Node?) {
+        if parentNode?.leftChild == nil && parentNode?.rightChild == nil {
+            parentNode = nil
+        }
         
     }
     
+    private func remove() {
+        
+    }
+    
+   
 }
 
 
